@@ -3,12 +3,16 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var cors = require("cors"); // Importera CORS
 
 // Importera routes
 var indexRouter = require("./routes/index");
 var salehorsesRouter = require("./routes/salehorses");
 
 var app = express();
+
+// Aktivera CORS
+app.use(cors());
 
 // Views
 app.set("views", path.join(__dirname, "views"));
@@ -21,7 +25,7 @@ app.use(cookieParser());
 var mongoose = require("mongoose");
 app.use(express.static(path.join(__dirname, "public")));
 
-// Routes används
+// Routes
 app.use("/", indexRouter);
 app.use("/salehorses", salehorsesRouter);
 
